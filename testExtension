@@ -7,4 +7,5 @@ if(testVar !== false){
 }
 //you may edit this file in github, but not in tealium
 //you still have to click (approve for publish)
-//this is now a branch test- let's see what happens BRANCH TEST COMMENCE
+//this is now a branch test- let's see what happens
+//THIS USER IS NOT ALLOWED TO TOUCH MASTER. I wonder if i can lock the master branch?
