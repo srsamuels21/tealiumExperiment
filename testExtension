@@ -2,7 +2,7 @@
 var testVar = true;
 if(testVar !== false){
   if(b.site_abbreviation == "hc"){
-    console.log("wow, amazing, github really works!")
+    console.log("wow, amazing, github really works! You're ready to go.")
   }
 }
 //you may edit this file in github, but not in tealium
@@ -12,3 +12,5 @@ if(testVar !== false){
 //local branches CAN see github branches- if the local repository was the one that initialized the branch.
 //this test is to see if i can pull commits from github
 //it worked! this new test is to see if I can push commits to GitHub from my laptop
+//now to see if this will go into tealium directly
+//if so, this may conclude our testing 
