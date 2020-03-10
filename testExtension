@@ -2,7 +2,7 @@
 var testVar = true;
 if(testVar !== false){
   if(b.site_abbreviation == "hc"){
-    console.log("wow, amazing, github really works!")
+    console.log("wow, amazing, github really works! testing has now concluded. you may delete this extension.")
   }
 }
 //you may edit this file in github, but not in tealium
@@ -12,6 +12,6 @@ if(testVar !== false){
 //local branches CAN see github branches- if the local repository was the one that initialized the branch.
 //this test is to see if i can pull commits from github
 //it worked! this new test is to see if I can push commits to GitHub from my laptop
-//make sure to make changes to these files only after merging your master branches. 
+//make sure to make changes to these files only after merging your master branches in your local & . 
 //Don't forget, or you'll wipe out all your changes!
 //now we are trying to go straight to tealium. This will conclude our test.
