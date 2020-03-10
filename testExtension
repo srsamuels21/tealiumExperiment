@@ -7,4 +7,5 @@ if(testVar !== false){
 }
 //you may edit this file in github, but not in tealium
 //you still have to click (approve for publish)
-//this is now a branch test- let's see what happens BRANCH TEST COMMENCE
+//we want to see which branch commit will prevail, likely this one.
+//i called this branch "sam fix e120" as if it were a real tealium request. we would have mults. of these for each story
