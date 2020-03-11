@@ -1,0 +1,169 @@
+/*GIT COMMANDS*/
+a. OPEN YOUR TERMINAL
+b. TYPE IN git --help!
+c. TYPE IN cd localRepositoryName
+d.
+
+GIT CONFIGURATION
+
+git config
+git config color.ui true
+git config format.pretty oneline
+
+//use git interactive guide
+git add -i
+
+BASICS
+
+//create new local repository
+git init
+
+//create working copy of a local repository
+git clone /path/to/repository
+//remotely
+git clone username@host:/path/to/repository
+
+//add files to a repository 
+git add <filename>
+
+git add *
+
+//commit changes to repository
+git commit -m "Commit message"
+//commit new files & changed files
+git commit -a
+//fix mistakes in commit by referencing the last file commit & overwriting new changes
+git commit --amend
+
+//send changes to master branch
+git push origin master
+
+//list files changed & uncommitted
+git status
+//list history of repository changes
+git log
+git log --author=sam
+git log --help
+
+EXIT git log by pressing q
+
+//connect to a remote repository
+git remote add origin <server>
+
+//list currently configured remote repositories
+git remote -v
+
+
+
+BRANCHES
+
+//create a new branch
+git checkout -b <branchname>
+
+//switch branches
+git checkout <branchname>
+
+//list all branches in your repository
+git branch
+
+//delete branch
+git branch -d <branchname>
+
+//push all branches to a remote repository
+git push --all origin
+
+//push one branch to a remote repository
+git push origin <branchname>
+
+//delete a branch from the remote repository
+git push origin :<branchname>
+
+
+
+UPDATE FROM THE REMOTE REPOSITORY
+
+//merge changes from repository to local working directory
+git pull
+
+//merge a branch to your active branch
+git merge <branchname>
+
+//view merge conflicts
+git diff fileName
+//against the base file
+git diff --base <filename>
+//preview changes
+git diff <sourcebranch> <targetbranch>
+
+//mark the file changed
+git add <filename>
+
+
+
+UNDO CHANGES
+
+//remove changes from staging- (you added but didn't commit changes)
+git reset -- filename
+//reset entire staging environment, but not working directory files
+git reset
+
+//remove changes from local files & revert to master branch copy
+git checkout -- filename
+
+//revert changes- drop all your latest local changes. revert code to last history & fix local master
+git fetch origin
+git reset --hard origin/master
+
+git reset --soft
+SEARCH
+
+//search working directory
+git grep "function()"
+
+
+
+/*COMBO COMMANDS*/
+
+//committing new code
+cd tealium-inventory
+git add .
+git commit -m "description"
+git push origin master
+
+//clone your repository
+git clone https://stash.mynmg.com/scm/~vsss123/tealium-inventory.git
+
+//code ready to be published to this repository
+cd existing-project
+git init
+git add --all
+git commit -m "Initial Commit"
+git remote add origin https://stash.mynmg.com/scm/~vsss123/tealium-inventory.git
+git push -u origin master
+
+//outsource to existing git project if code is already tracked
+cd existing-project
+git remote set-url origin https://stash.mynmg.com/scm/~vsss123/tealium-inventory.git
+git push -u origin --all
+git push origin --tags
+
+//skip staging altogether & just commit
+git commit (filename|-a)
+
+//revert to changes in repository from your local directory & staging environment
+git checkout HEAD -- filename
+
+//create a branch & use it as a save to revert to
+git branch -b savedBranch
+git merge master branchChanged
+
+now if you don't like what you did in branchChanged you can 
+git reset --hard savedBranch
+
+/*COMMANDS SPECIFIC TO ME*/
+git clone /Users/vsss123/tealium-inventory/
+
+//categorize
+git branch --unset-upstream
+git branch --set-upstream-to=origin/<branch>
+
