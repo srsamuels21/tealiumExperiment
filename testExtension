@@ -12,6 +12,6 @@ if(testVar !== false){
 //local branches CAN see github branches- if the local repository was the one that initialized the branch.
 //this test is to see if i can pull commits from github
 //it worked! this new test is to see if I can push commits to GitHub from my laptop
-//make sure to make changes to these files only after merging your master branches in your local & . 
-//Don't forget, or you'll wipe out all your changes!
-//now we are trying to go straight to tealium. This will conclude our test.
+//now to see if this will go into tealium directly
+//if so, this may conclude our testing 
+//TEST COMPLETE
