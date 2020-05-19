@@ -1,8 +1,8 @@
 //DO NOT DELETE
-var testVar = true;
+var testVar = false;
 if(testVar !== false){
   if(b.site_abbreviation == "hc"){
-    console.log("wow, amazing, github really works! You're ready to go.")
+    console.log("wow, amazing, github really works! testing has now concluded. you may delete this extension.")
   }
 }
 //you may edit this file in github, but not in tealium

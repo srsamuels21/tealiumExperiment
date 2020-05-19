@@ -1,0 +1,660 @@
+**************************l.analyticsDT cleanup record*************************
+
+                            DELETED EXTENSIONS
+
+/*code exists elsewhere*/
+*Percentage page view set method(prop38)
+*Percentage page view get method(prop38)
+
+
+*Ebates event 53
+
+/*
+ * Set variable for next page when the user selects the activate button for ebates
+ */
+try {
+    var ebates = document.querySelectorAll('button.ebates-notification-button, div.ebates-notification-button, button.ebates-button');
+    for (var i = 0; i < ebates.length; i++) {
+        nm.om.attachEvent(ebates[i], nm.om.cl, function(e) {
+            var omJSON = {};
+            omJSON.ebates_click = 'true';
+            nm.om.appendCookie(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+        });
+    }
+} catch (e) {
+    try {
+        console.log('ebates link error' + e);
+    } catch (e) {}
+}
+
+*My Favorites set variables
+
+/*/*My Favorite Items prop20 channel evar4*/
+if (b['page_definition_id'] == 'myfavoriteitems' || b['dom.pathname'].toString().indexOf('/myfavorites/myFavoriteItems.jsp') > -1) {
+    b['page_name'] = 'My Favorites:Favorite items';
+    b['channel'] = 'Account';
+    b['product_finding_method'] = 'Favorites';
+}
+
+/*My Favorite Items prop20 channel evar4*/
+if ((b['page_definition_id'] == 'RWD' && b['dom.pathname'].toString().indexOf('/myfavorites/myFavoriteDesigners.jsp') > -1)) {
+    b['page_name'] = 'My Favorites:Favorite Designers';
+    b['channel'] = 'Account';
+    b['product_finding_method'] = 'Favorites';
+}*/
+******************************************************************************
+
+                        COMMENTED OUT CODE DUMP
+
+*Experience Cloud
+
+PASS
+
+*Pre Loader functions
+
+PASS
+
+*Plugins and Modules
+
+//CONFIG
+
+/*s.ActionDepthTest = true;
+s.cookieDomainPeriods = "2"
+s.fpCookieDomainPeriods = "2"
+s.charSet = ""*/
+
+/*s.socialAuthors();
+    add other integration module dependent functions here*/
+
+//timeparting configuration
+//Australia
+/*
+s._tpDST = { 
+2012:'4/1,10/7', 
+2013:'4/7,10/6', 
+2014:'4/6,10/5', 
+2015:'4/5,10/4', 
+2016:'4/3,10/2', 
+2017:'4/2,10/1', 
+2018:'4/1,10/7', 
+2019:'4/7,10/6',
+2020:'4/5,10/4',
+2021:'4/4,10/3'} 
+*/
+
+//Europe 
+/*
+s._tpDST = { 
+2012:'3/25,10/28', 
+2013:'3/31,10/27', 
+2014:'3/30,10/26', 
+2015:'3/29,10/25', 
+2016:'3/27,10/30', 
+2017:'3/26,10/29', 
+2018:'3/25,10/28', 
+2019:'3/31,10/27',
+2020:'3/29,10/25',
+2021:'3/28,10/31'}
+*/
+
+//plugin config
+
+//optimizely
+// if(!window.s.registerPreTrackCallback){
+//     window.s.registerPreTrackCallback(function() {
+//         // right before Adobe call
+//     	console.log('Adobe Pre-Track Time: ' + new Date().getTime());
+//     }); 
+// }
+
+//s.doPlugins = s_doPlugins;
+
+//TMS-1153
+// s.referrer = "Typed/Bookmarked";
+
+//Plugin: dynComp v2.03
+//s_dynCompI();
+
+                                           
+*Global Omniture Variables
+
+// TMS-1225 mobile v81 update, e105, e106, e107, v81
+// if (b.page_type && (b.page_type == 'search' || b.page_type == 'subcategory' || b.page_type == 'boutique' || b.page_type == 'category' || b.page_type == 'home' || b.page_type == 'product detail')){
+//  var hamburgerImgDT = document.querySelector('#header-section div.mobile-only img');
+//  if(hamburgerImgDT){
+//      nm.om.attachEvent(hamburgerImgDT, nm.om.cl, function(e) {
+//          nm.om.click_interaction("hamburger_nav", "expand_nav");//e105
+//          setTimeout(function(){
+//              var itemList = document.querySelectorAll('#navSliderContainer ul li');              
+//              for (var i = 0; i < itemList.length; i++) {
+//                  attachEventToNavItem(itemList[i]);
+//              }
+//          }, 800);
+//      });
+//  }
+
+//  function attachEventToNavItem(item){
+//      if(item == null){
+//          return;
+//      }
+//      nm.om.attachEvent(item, nm.om.cl, function(e) {
+//          var aLink = item.querySelector('a');
+//          if(aLink){
+//              if(aLink.hasAttribute('href')){//it's a link
+//                  var omJSON = {};
+//                  omJSON.mobile_nav_click = 'true';
+//                  nm.om.appendCookie(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+//              }else if(aLink.hasAttribute('aria-expanded') && aLink.getAttribute('aria-expanded') == 'true'){//expanded
+//                  //if it's already expanded, currently do nothing
+//              }else{//folded                  
+//                  nm.om.click_interaction("hamburger_nav", "expand_cat");//e107
+//                  //need timeout and add to the children "+"
+//                  setTimeout(function(){
+//                      var nextLevelList = item.querySelectorAll('#navSliderContainer ul li');
+//                      for(var i = 0; i < nextLevelList.length; i++){
+//                          attachEventToNavItem(nextLevelList[i]);
+//                      }
+//                  }, 800);
+//              }
+//          }//else ignore - doesn't have any link
+//      });
+//  }
+// }
+// Old nav logic above. Refactored to new logic below (TMS-1262).
+/*
+var navOpen = document.querySelectorAll('#navSliderContainer');
+if (navOpen) {
+        nm.om.attachEvent(navOpen[0], nm.om.cl, function(e) {
+            var el = e.target;
+                    if (el.hasAttribute('href')) {
+                            var omJSON = {};
+                            omJSON.mobile_nav_click = 'true';
+                            nm.om.appendCookie(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+                    }
+            });
+}
+*/
+/*
+var hamburgerImgDT = document.querySelector('#header-section div.mobile-only img');
+if (hamburgerImgDT) {
+        nm.om.attachEvent(hamburgerImgDT, nm.om.cl, function(e) {
+            var el = e.target;
+            if (el.getAttribute('class') == 'mobile-navigation-hamburger-nav') {
+                    nm.om.click_interaction("hamburger_nav", "expand_nav");
+            }
+        });
+}
+*/
+
+//MObile Navigation event106 and eVar81
+/*
+if (omCookie.mobile_nav_click && omCookie.mobile_nav_click == 'true') {
+    console.log("true");
+    if (b.bread_crumb) {
+        b.nav_method = 'Mobile Nav|' + b.bread_crumb;
+    } else {
+        b.nav_method = 'Mobile Nav|Non-Category';
+    }
+    try {
+        b['sc_events'] = u.addEvent("event106");
+    } catch (e) {}
+    omCookie.mobile_nav_click = 'false';
+}
+*/
+
+//create productmerch product for merchandising eVar binding (Merchandising Instance)
+/*
+  var pageTypeList3 = ['product listing', 'sub-category', 'subcategory', 'search', 'boutique', 'category', 'silo', 'f0', 'mynm', 'monogrampath', 'catalog quick order', 'slyce'];
+var arrList3 = '.' + pageTypeList3.join('.') + '.';
+if (b.page_type && b.page_type != '') {
+    var pageSubString = '.' + b.page_type.toString().toLowerCase() + '.';
+    if (arrList3.indexOf(pageSubString) > -1) {
+        if (b.event_name) {
+            if (b.event_name == 'pageLoad') {
+                window.s_productMerch();
+            } else if (b.event_name != 'Quicklook' || b.event_name != 'SKUData' || b.event_name != 'MiniCartResp') {
+                window.s_productMerch();
+            }
+        }
+    }
+}
+
+if (s.c_r('productnum') && s.events.indexOf('purchase') > -1) {
+    s.c_w('productnum', '0', 0);
+}
+*/
+
+/*Set eVar12, event145 for banner with ICID click throughs*/
+/*if(b.page_name && b.page_name !== 'Homepage' && b['qp.icid']){
+    if(omCookie.banner_icid && omCookie.banner_icid != ''){
+        if(omCookie.banner_icid !== 'drawer'){
+            try {
+                b['sc_events'] = u.addEvent("event145");
+            } catch (e) {}
+        }
+        b.ic_code = b['qp.icid'];
+        omCookie.banner_icid = '';
+    }
+}*/
+
+//console.log("s_getVisitNum(): " + s_getVisitNum());
+//console.log("s.getVisitNum(): " + s.getVisitNum());
+//console.log("tealium visit: " + utag.data['cp.utag_main__sn']);
+
+*Global Event Handlers & Dom Ready Functions
+
+/*
+ * Capture URL of current page && evaluate ICID links
+ */
+/*try {
+    //Capture last element clicked
+    nm.om.attachEvent(window, 'click', function(e) {
+        nm.om.last_clicked = e.target;
+    });
+    //Capture ICID code from link or last element clicked to be used on following page
+    nm.om.attachEvent(window, 'beforeunload', function(e) {
+        window.sessionStorage.setItem("current-url-om", window.location.href);
+        var parentA = nm.om.closest(nm.om.last_clicked, 'a', 'body');
+        var parentDiv = nm.om.closest(document.activeElement, 'div.drawer-promo-container', '#silo-navigation');
+        //console.log('leaving page event');
+        if (parentA) {
+            //console.log('parentA found');
+            var link = parentA.getAttribute('href');
+            if (link) {
+                //console.log('link attribute found');
+                var ic_code = window.getUrlParam('icid', link);
+                //console.log('icid = ' + ic_code);
+            }
+        } else {
+            var ic_code = window.getUrlParam('icid', document.activeElement.href);
+        }
+        if (ic_code && ic_code != '') {
+            var omJSON = {};
+            if (!parentDiv) {
+                omJSON.banner_icid = ic_code;
+            } else {
+                omJSON.banner_icid = 'drawer';
+            }
+            //console.log('banner icid = ' + omJSON.banner_icid);
+            if (!nm.om.isEmpty(omJSON)) {
+                nm.om.appendCookie(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+            }
+        }
+        if (utag_data_dt.page_type && utag_data_dt.page_type == 'product detail') {
+            //Save truefit data for next page
+            try {
+                if (window.tf) {
+                    if (tf.success && tf.success == 'true') {
+                        nm.cookie.set('tf_ck', 'true', 0, '/');
+                    }
+                }
+            } catch (e) {
+                console.log('error setting truefit property');
+            };
+        }
+    });
+} catch (e) {
+    try {
+        console.log('icid link error' + e);
+    } catch (e) {}
+}*/
+// TMS-774  Add tagging to Mobile Nav for My Account & Favorites
+/*var mobileNavCookieConfig = {}
+mobileNavCookieConfig['signin'] = 'myaccount:signin'
+mobileNavCookieConfig['orderHistory'] = 'myaccount:orderhistory'
+mobileNavCookieConfig['Overview'] = 'myaccount:overview'
+mobileNavCookieConfig['addressBook'] = 'myaccount:addressbook'
+mobileNavCookieConfig['nmCreditCard'] = 'myaccount:nmcreditcard'
+mobileNavCookieConfig['paymentInfo'] = 'myaccount:paymentinformation'
+mobileNavCookieConfig['myFavorites'] = 'myfavorites'
+
+function setMobileNavCookie(target) {
+    var _parent = nm.om.closest(target, 'li[data-navid]', 'ul.mobileLeftNavMenu')
+    var val = _parent.getAttribute('data-navid')
+    if (mobileNavCookieConfig[val]) {
+        var omJSON = {};
+        omJSON.mobile_account_link = mobileNavCookieConfig[val];
+        console.log(omJSON);
+        window.nm.cookie.set(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+        return true;
+    } else {
+        return false;
+    }
+}*/
+
+//change selector to encompass the entire mobile nav
+/*var mobNav = document.querySelectorAll('ul.mobileLeftNavMenu');
+for (var i = 0; i < mobNav.length; i++) {
+    nm.om.attachEvent(mobNav[i], nm.om.cl,
+        function(e) {
+            setMobileNavCookie(e.target, 'Local')
+        }
+    );
+}*/
+/*
+try {
+    if (jQuery) {
+        //set event105 when user opens mobile nav
+        jQuery(document).on('click.mobile_nav', 'div.mobile-navigation-hamburger-nav-container a img.mobile-navigation-hamburger-nav', function() {
+            nm.om.click_interaction("hamburger_nav", "expand_nav");
+        });
+
+        //set event106 when user clicks through mobile nav link
+        jQuery(document).on('click.nav_click_through', 'div.nav-slider-menu--show li a.nav-slider-menu__link', function(e) {
+            var omJSON = {};
+            omJSON.mobile_nav_click = 'true';
+            nm.om.appendCookie(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+        });
+
+        //set event107 when user expands menu item on mobile nav
+        jQuery(document).on("click.nav_active", "div.nav-slider-menu--show li a.nav-slider-menu__item--primary-selected, div.nav-slider-menu--show li a.nav-slider-menu__item--secondary-selected", function(e) {
+            var li = jQuery(e.target).closest("li");
+            if (li.length === 1) {
+                nm.om.click_interaction("hamburger_nav", "expand_cat");
+            }
+        });
+    }
+} catch (e) {
+    try {
+        console.log('mobile nav link error' + e);
+    } catch (e) {}
+} */
+
+*Product Page, Quicklook, PLA event handlers
+
+//Event Listeners for PDPs
+/*CTL Product Click, Paginate (e52)
+if(utag_data.page_type && utag_data.page_type == 'Product Detail'){
+    var pagButtons = 'ul.pagination>li:nth-child(2)>a, ul.pagination>li:nth-child(3)>a';
+    var selector = 'click';
+    RWD.on(selector, pagButtons, function(e){
+        var omJSON = {};
+        omJSON.pdpPaginate = 'true';
+        window.nm.cookie.set(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+    });
+}*/
+
+// Video Control click below Hero image
+    // var vidImagesDot = document.querySelectorAll("div.product-media .main-media ul.slick-dots li:last-child");
+    // for (var i = 0; i < vidImagesDot.length; i++) {
+    //     nm.om.attachEvent(vidImagesDot[i], nm.om.cl, function(e) {
+    //         nm.om.click_interaction("product", "video", "product interaction");
+    //     });
+    // }
+    // var videoControl = document.querySelectorAll("div.product-media div.main-media__controls button.main-media__play, li.video");
+    // for (var i = 0; i < videoControl.length; i++) {
+    //     nm.om.attachEvent(videoControl[i], nm.om.cl, function() {
+    //         nm.om.click_interaction("product", "video", "product interaction");
+    //     });
+    // }
+
+    //  if (quickLookSize && window.nm.sizeSelection != 'true') {
+    //             nm.om.click_interaction("product", "size selection", "product interaction");
+    //             window.nm.sizeSelection = 'true';
+       //   }
+       //else if(quickLookColor){
+       //       var quickLookColorImg = quickLookColor.querySelector('img');
+       //       if (utag_data_dt.event_name == "Quicklook") {
+    //                 window.nm.colorSelection = 'false';                     
+    //             }
+       //       if(quickLookColorImg && quickLookColorImg.hasAttribute('src') && window.nm.colorSelection != 'true'){
+                //  var colorCode = quickLookColorImg.getAttribute('src');
+       //           colorCode = colorCode.substring(colorCode.lastIndexOf('/') + 1, colorCode.indexOf('.jpg'));
+       //           utag.link({
+       //                 "quicklook_colorswatch": colorCode,
+       //                 "product_interaction": "size/color selection"
+       //             });
+       //             window.nm.colorSelection = 'true';
+       //         }else{
+       //           if (window.nm.colorSelection != 'true') {
+    //                     nm.om.click_interaction("product", "size/color selection", "product interaction");
+    //                     window.nm.colorSelection = 'true';
+    //                 }
+       //         }
+       //   }
+
+*Product Page Load, Quicklook, PLA set variables
+
+/*Sets prop61 for Share this Pinterest for pdp layout*/
+// var shareThis1 = document.querySelectorAll("div.social-share, button.social-share__icon__btn");
+// nm.om.attachEvent(shareThis1[0], nm.om.cl, function(e) {
+//     setTimeout(function() {
+//         var sharePinterest1 = document.querySelectorAll("img.social-share-tooltip__icon__pinterest");
+//         nm.om.attachEvent(sharePinterest1[0], nm.om.cl, function(e) {
+//             nm.om.click_interaction("product", "share this:pinterest", "product interaction");
+//         });
+//     }, 600);
+// });
+
+// Commented out per TMS-1228.
+// if (b['ut.event'] && b['ut.event'] == 'link') {
+//     if (b.ajax_response_id && b.ajax_response_id == 'RWD.modals.monogram.MonogramModalResp') {
+//         exSaleType();
+//     }
+// }
+
+// Commented out per TMS-1228.
+/*Sale Type - Monogram Modal (v53)(c41)*/
+// if (b.ajax_response_id && b.ajax_response_id == 'RWD.modals.monogram.MonogramModalResp') {
+//     if (b.product_cmos_item && b.product_cmos_item.length != 0) {
+//         tempArray = [];
+//         tempArray = b.product_cmos_item.split(',');
+//         for (var i = 0; i < tempArray.length; i++) {
+//             // Trim the excess whitespace.
+//             tempArray[i] = tempArray[i].replace(/^\s*/, "").replace(/\s*$/, "");
+//         }
+//         b._cprod = tempArray;
+//     }
+//     b.product_interaction = 'Personalize';
+// }
+
+/*if (b.ajax_response_id && b.ajax_response_id == 'Quicklook') {
+    if (b.category_product_type && b.category_product_type != '') {
+        b.preferred_pcs_product = b.category_product_type;
+        b.category_product_type = '';
+    } else {
+        b.preferred_pcs_product = 'Regular';
+    }
+    if (b.setEvent && b.setEvent == 'true') {
+        u.addEvent("event52");
+        b.setEvent = '';
+    }
+}*/
+
+//v4 set
+/*} else if (omCookie.prev_page_link && omCookie.prev_page_link == 'EVG_Null_Search') {
+        b.product_finding_method = 'Null Search';*/
+
+
+//v35
+ //       b['imgNum'] = omCookie.cat_image_number;
+ /*   if (b['imgNum'] && b['imgNum'] != 'undefined' && b['imgNum'].length > 0 && b.page_type == 'product detail') {
+        c = [b['cp.page_number'], b['imgNum']];
+        b['imgNum_withClickthrough'] = c.join(':')
+    }
+*/
+
+// TMS-1447 - to fix the null search issue
+// if (b.previous_page_name == "null search") {
+//     b['product_finding_method'] = 'Null Search';                        
+// }
+
+e25
+//if ((b.event_name && b.event_name == 'pageLoad') & (b.previous_page_name && b.previous_page_name != "Search")) { 
+
+// Original event25 logic removed
+// if ((b.event_name && b.event_name == 'Quicklook') && (typeof utag.data.internal_search_term == 'undefined')) { //TMS-1211
+//     b['sc_events'] = u.addEvent("event25");
+//     b.pdp_prod_impression = "1";
+// }
+
+ /*if(omCookie.highPct && Number(omCookie.highPct) > Number(s._ppvHighestPercentViewed)){
+            b.percent_viewed = omCookie.highPct +"|"+ omCookie.ppv;
+        }else {*/
+
+*ALL TAGS VARIABLES
+//referrer
+/*
+if (typeof sessionStorage !== 'undefined') {
+    window.nm.referrer = sessionStorage.getItem('distil_referrer') || document.referrer;
+    sessionStorage.removeItem('distil_referrer');
+} else {
+    window.nm.referrer = document.referrer;
+}
+*/
+
+*ADD REMOVE MODIFY CART DATA
+/*
+if (b.event_name && b.event_name === 'MiniCartResp') {
+    if (b['cart_change_product_cmos_item'] && b['cart_change_product_cmos_item'].length > 0) {
+        b.productString = [];
+        for (var x = 0; x < b.cart_change_product_cmos_item.length; x++) {
+            b.productString[x] = b.cart_change_product_catalog_id[x] + '_' + b.cart_change_product_cmos_item[x];
+        }
+    }
+}
+else if (b.event_name && b.event_name !== 'MiniCartResp' && (typeof b.favorite_item === 'undefined' || b.favorite_item.length == 0)) {
+    if (b['product_cmos_item'] && b['product_cmos_item'].length > 0) {
+        b.productString = [];
+        for (var x = 0; x < b.product_cmos_item.length; x++){
+            b.productString[x] = b.product_cmos_catalog_id[x] + '_' + b.product_cmos_item[x];
+        }
+        //b['productString'] = b['product_cmos_item'];
+    }
+}
+if ((b.event_name && b.event_name === 'MiniCartResp') && (typeof b.cart_change_product_quantity != 'undefined' && b.cart_change_product_quantity.length > 0) && (typeof b.cart_change_product_price != 'undefined' && b.cart_change_product_price.length > 0)) {
+    b.prod_price = [];
+    b.prod_quan = [];
+    b.sum = [];
+    b.cart_change_gwp_quantity = [];
+    for (var i = 0; i < b.cart_change_product_price.length; i++) {
+        b.prod_price.push(+b.cart_change_product_price[i]);
+        b.prod_quan.push(+b.cart_change_product_quantity[i]);
+        b.sum[i] = b.prod_price[i] * b.prod_quan[i];
+        b.sum[i] = b.sum[i].toString();
+        if (b.cart_change_product_price[i] == '0.00') {
+            b.cart_change_gwp_quantity[i] = b.cart_change_product_quantity[i];
+        } else {
+            b.cart_change_gwp_quantity[i] = "";
+        }
+    }
+    b['sc_events'] = u.addEvent("scAdd");
+    b['sc_events'] = u.addEvent("scOpen");
+    b['sc_events'] = u.addEvent("event81");
+    b.add_quan = b.cart_change_product_quantity;
+    b.add_price = b.sum;
+    b.cart_add_prod_price = b.cart_change_product_price;
+    if (b.cart_change_gwp_quantity.length === 1 && b.cart_change_gwp_quantity[0] === "") {
+        delete b.cart_change_gwp_quantity;
+    }
+}
+*/
+
+*CAT/SUBCAT BOUTIQUE
+
+
+/*Category product type click evar43 && event52
+var imgClick = 'click';
+var productSelector = 'figure.product-thumbnail';
+RWD.on(imgClick, productSelector, function(e) {
+    if (utag_data.page_type && utag_data.page_type == 'Category' || utag_data.page_type == 'Sub-Category' || utag_data.page_type == 'Search') {
+        var el = jQuery(e.target);
+        //Product image or description was clicked
+        if (el.is('img.product-thumbnail-image') || el.closest('figcaption.product-description').length > 0) {
+            var parentDiv = el.closest('div.product-image-frame');
+            var parentDivAttr = parentDiv.attr('ispcsproduct');
+            var parentLi = el.closest('li.category-item');
+            var parentLiAttr = parentLi.attr('img_order');
+            var productPosition = parseInt(parentLiAttr);
+            var preProfNumInt = parseInt(utag_data.preferred_product_numbers);
+            var omJSON = {};
+            var tempproducttype = '';
+            if (parentDivAttr == 'true') {
+                //set pcs product info for next page
+                tempproducttype = 'PCS';
+            } else {
+                //set regular product for next page
+                tempproducttype = 'Regular';
+            }
+            if (utag_data.page_number && utag_data.page_number == '1') {
+                if (utag_data.sort_method && utag_data.sort_method == 'BEST MATCH') {
+                    if (utag_data.filter_type && utag_data.filter_type.length == 0) {
+                        if (productPosition && preProfNumInt && productPosition <= preProfNumInt) {
+                            //set preferred product for next page\
+                            tempproducttype = 'Preferred';
+                        }
+                    } else if (typeof utag_data.filter_type == 'undefined') {
+                        if (productPosition && preProfNumInt && productPosition <= preProfNumInt) {
+                            //set preferred product for next page\
+                            tempproducttype = 'Preferred';
+                        }
+                    }
+                }
+            }
+            if (utag_data.page_type == 'Search') {
+                omJSON = {
+                    category_product_type: tempproducttype,
+                    setEvent: 'true'
+                }
+            } else {
+                omJSON.category_product_type = tempproducttype;
+            }
+            window.nm.cookie.set(nm.omPreviousPageCookieName, JSON.stringify(omJSON), 0, '/');
+        }
+        //Quicklook was clicked
+        if (el.is('a.quick-look')) {
+            var parentDiv = el.closest('div.product-image-frame');
+            var parentDivAttr = parentDiv.attr('ispcsproduct');
+            var parentLi = el.closest('li.category-item');
+            var parentLiAttr = parentLi.attr('img_order');
+            var productPosition = parseInt(parentLiAttr);
+            var preProfNumInt = parseInt(utag_data.preferred_product_numbers);
+            if (parentDivAttr == 'true') {
+                //set pcs product info for next page
+                utag_data.category_product_type = 'PCS';
+            } else {
+                //set regular product for next page
+                utag_data.category_product_type = 'Regular';
+            }
+            if (utag_data.page_number && utag_data.page_number == '1') {
+                if (utag_data.sort_method && utag_data.sort_method == 'BEST MATCH') {
+                    if (utag_data.filter_type && utag_data.filter_type.length == 0) {
+                        if (productPosition && preProfNumInt && productPosition <= preProfNumInt) {
+                            //set preferred product for next page
+                            utag_data.category_product_type = 'Preferred';
+                        }
+                    } else if (typeof utag_data.filter_type == 'undefined') {
+                        if (productPosition && preProfNumInt && productPosition <= preProfNumInt) {
+                            //set preferred product for next page
+                            utag_data.category_product_type = 'Preferred';
+                        }
+                    }
+                }
+            }
+            if (utag_data.page_type == 'Search') {
+                utag_data.setEvent = 'true';
+            }
+        }
+    }
+});*/
+
+/*Enter button && search type ahead click events*/
+/*
+var searchBtn = document.querySelectorAll('table.input-and-button, input.headerSearchButton, div.brm-autosuggest-menu ul li');
+for (var i = 0; i < searchBtn.length; i++) {
+    nm.om.attachEvent(searchBtn[i], nm.om.cl, function(e) {
+        var el = e.target;
+        if (el) {
+            var elVal = el.tagName.toString().toLowerCase();
+            if (elVal === 'input') {
+                var searchInput = document.getElementById('mobileRfkSearchInput') || document.getElementById('brSearchInput') || document.getElementById('searchInput') || document.getElementById('mobileSearchInput');
+                var searchTxt = searchInput.value;
+                nm.om.searchSubmit(searchTxt);
+            } else if (elVal === 'a') {
+                var searchTxt = el.textContent;
+                nm.om.searchSubmit(searchTxt, 't');
+            }
+        }
+    });
+}
+*/
